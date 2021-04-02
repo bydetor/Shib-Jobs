@@ -1,4 +1,4 @@
-75927b47e196c94186ab8b55d83da191a45ac49bconst CoinGecko = require('coingecko-api');
+const CoinGecko = require('coingecko-api');
 const { clearChats, createEmbed } = require('../utilities.js');
 const CoinGeckoClient = new CoinGecko();
 const axios = require('axios');
@@ -6,7 +6,7 @@ const axios = require('axios');
 module.exports = async (client, statsChannel) => {
 	const getStats = async () => {
 		const geckoRequest = await CoinGeckoClient.coins.fetch('dogecash');
-		const walletStats = await axios.get('https://chain.review/api/db/dogecash/getstats1');
+		const walletStats = await axios.get('https://chain.review/api/db/dogecash/getstats');
 
 		const priceUSD = geckoRequest['data']['market_data']['current_price']['usd'];
 		const masternodes = walletStats['data']['masternodesCount'];
@@ -109,7 +109,7 @@ module.exports = async (client, statsChannel) => {
 		}
 		catch (e) {
 			console.log(e);
-            //keep trying
+			// keep trying
 			send();
 		}
 	};
