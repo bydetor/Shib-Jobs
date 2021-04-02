@@ -1,4 +1,4 @@
-const CoinGecko = require('coingecko-api');
+75927b47e196c94186ab8b55d83da191a45ac49bconst CoinGecko = require('coingecko-api');
 const { clearChats, createEmbed } = require('../utilities.js');
 const CoinGeckoClient = new CoinGecko();
 const axios = require('axios');
@@ -6,7 +6,7 @@ const axios = require('axios');
 module.exports = async (client, statsChannel) => {
 	const getStats = async () => {
 		const geckoRequest = await CoinGeckoClient.coins.fetch('dogecash');
-		const walletStats = await axios.get('https://chain.review/api/db/dogecash/getstats');
+		const walletStats = await axios.get('https://chain.review/api/db/dogecash/getstats1');
 
 		const priceUSD = geckoRequest['data']['market_data']['current_price']['usd'];
 		const masternodes = walletStats['data']['masternodesCount'];
@@ -79,35 +79,40 @@ module.exports = async (client, statsChannel) => {
 
 	};
 
-	try {
-		await clearChats(statsChannel);
+	const send = async () => {
+		try {
+			await clearChats(statsChannel);
 
-		let messages = await createMessages();
+			let messages = await createMessages();
 
-		setInterval(() => {
-			messages = createMessages();
-		}, 15000);
+			setInterval(() => {
+				messages = createMessages();
+			}, 15000);
 
-		statsChannel.send(messages['price']).then((msg) => {
-			setInterval(() => {msg.edit(messages['price']);}, 6000);
-		});
+			statsChannel.send(messages['price']).then((msg) => {
+				setInterval(() => {msg.edit(messages['price']);}, 6000);
+			});
 
-		statsChannel.send(messages['masternodes']).then((msg) => {
-			setInterval(() => {msg.edit(messages['masternodes']);}, 6000);
-		});
+			statsChannel.send(messages['masternodes']).then((msg) => {
+				setInterval(() => {msg.edit(messages['masternodes']);}, 6000);
+			});
 
-		statsChannel.send(messages['blocks']).then((msg) => {
-			setInterval(() => {msg.edit(messages['blocks']);}, 6000);
-		});
+			statsChannel.send(messages['blocks']).then((msg) => {
+				setInterval(() => {msg.edit(messages['blocks']);}, 6000);
+			});
 
-		// eslint-disable-next-line no-constant-condition
-		while (true) {
-			await new Promise(resolve => setTimeout(resolve, 6000));
-			messages = await createMessages();
+			// eslint-disable-next-line no-constant-condition
+			while (true) {
+				await new Promise(resolve => setTimeout(resolve, 6000));
+				messages = await createMessages();
+			}
 		}
-	}
-	catch (e) {
-		console.log(e);
-	}
+		catch (e) {
+			console.log(e);
+            //keep trying
+			send();
+		}
+	};
 
+	send();
 };
