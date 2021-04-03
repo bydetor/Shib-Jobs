@@ -47,7 +47,7 @@ module.exports = async (client, statsChannel) => {
 		const price_fields = [{ name: 'Price (USD)', value: `$${stats['price'].toLocaleString()}`, inline: true },
 			{ name: 'Price (BTC)', value: `${stats['price_btc'].toLocaleString(undefined, { minimumFractionDigits: 8 })} ฿`, inline: true },
 			{ name: '\u200b', value: '\u200b', inline: true },
-			{ name: 'Change 7h', value: `${stats['change_week'].toLocaleString()}%`, inline: true },
+			{ name: 'Change 7d', value: `${stats['change_week'].toLocaleString()}%`, inline: true },
 			{ name: 'Change 30d', value: `${stats['change_month'].toLocaleString()}%`, inline: true },
 			{ name: 'Change 1y', value: `${stats['change_year'].toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%`, inline: true },
 			{ name: 'Market Cap (USD)', value: `$${(stats['circulating_supply'] * stats['price']).toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`, inline: true },
@@ -81,30 +81,20 @@ module.exports = async (client, statsChannel) => {
 
 	const send = async () => {
 		try {
-			await clearChats(statsChannel);
-
-			let messages = await createMessages();
-
-			setInterval(() => {
-				messages = createMessages();
-			}, 15000);
-
-			statsChannel.send(messages['price']).then((msg) => {
-				setInterval(() => {msg.edit(messages['price']);}, 6000);
-			});
-
-			statsChannel.send(messages['masternodes']).then((msg) => {
-				setInterval(() => {msg.edit(messages['masternodes']);}, 6000);
-			});
-
-			statsChannel.send(messages['blocks']).then((msg) => {
-				setInterval(() => {msg.edit(messages['blocks']);}, 6000);
-			});
-
 			// eslint-disable-next-line no-constant-condition
 			while (true) {
-				await new Promise(resolve => setTimeout(resolve, 6000));
-				messages = await createMessages();
+				const messages = await createMessages();
+
+				await clearChats(statsChannel);
+
+				statsChannel.send(messages['price']);
+
+				statsChannel.send(messages['masternodes']);
+
+				statsChannel.send(messages['blocks']);
+
+				// wait 10 minutes before updating price again
+				await new Promise(resolve => setTimeout(resolve, 600000));
 			}
 		}
 		catch (e) {
