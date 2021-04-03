@@ -33,7 +33,7 @@ module.exports = async (client, statsChannel) => {
 			'masternodes': masternodes,
 			'dailyIncomeDOGEC': dailyIncomeDOGEC,
 			'dailyIncomeUSD': dailyIncomeUSD,
-			'rewardFreq': `${rewardFreq.toFixed(0)}h ${(rewardFreq % 60).toFixed(0)}m`,
+			'rewardFreq': `${Math.trunc(rewardFreq)}h ${(rewardFreq % 60).toFixed(0)}m`,
 			'roi': `${((yearlyIncomeDOGEC / 5000) * 100).toFixed(0)}% / ${((5000 / yearlyIncomeDOGEC) * 365).toFixed(0)} days`,
 			'coins_locked': `${(masternodes * 5000).toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} (${((masternodes * 5000 / circulatingSupply) * 100).toFixed(0)}%)`,
 			'current_blocks': walletStats['data']['block_count'],
