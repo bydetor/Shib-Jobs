@@ -21,6 +21,7 @@ module.exports = async (client, statsChannel) => {
 		return {
 			'price': priceUSD,
 			'price_btc': geckoRequest['data']['market_data']['current_price']['btc'],
+			'price_eth': geckoRequest['data']['market_data']['current_price']['eth'],
 			'change_week': geckoRequest['data']['market_data']['price_change_percentage_7d'],
 			'change_month': geckoRequest['data']['market_data']['price_change_percentage_30d'],
 			'change_year': geckoRequest['data']['market_data']['price_change_percentage_1y'],
@@ -46,7 +47,7 @@ module.exports = async (client, statsChannel) => {
 
 		const price_fields = [{ name: 'Price (USD)', value: `$${stats['price'].toLocaleString()}`, inline: true },
 			{ name: 'Price (BTC)', value: `${stats['price_btc'].toLocaleString(undefined, { minimumFractionDigits: 8 })} ฿`, inline: true },
-			{ name: '\u200b', value: '\u200b', inline: true },
+			{ name: 'Price (ETH)', value: `${stats['price_eth'].toLocaleString(undefined, { minimumFractionDigits: 8 })} ETH`, inline: true },
 			{ name: 'Change 7d', value: `${stats['change_week'].toLocaleString()}%`, inline: true },
 			{ name: 'Change 30d', value: `${stats['change_month'].toLocaleString()}%`, inline: true },
 			{ name: 'Change 1y', value: `${stats['change_year'].toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}%`, inline: true },

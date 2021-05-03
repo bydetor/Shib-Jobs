@@ -6,6 +6,7 @@ const statsMessages = require('./messages/stats');
 const linksMessages = require('./messages/links');
 const faqsMessages = require('./messages/faqs');
 const rulesMessages = require('./messages/rules');
+const tipsMessages = require('./messages/tips');
 
 client.on('ready', async () => {
 	console.log('Bot Now connected!');
@@ -15,6 +16,7 @@ client.on('ready', async () => {
 	const linksChannel = client.channels.cache.get(config.links_channel_id);
 	const faqsChannel = client.channels.cache.get(config.faqs_channel_id);
 	const rulesChannel = client.channels.cache.get(config.rules_channel_id);
+	const tipsChannel = client.channels.cache.get(config.tips_channel_id);
 	const membersChannelID = config.members_channel_id;
 	const guild = client.guilds.cache.get(config.server_id);
 
@@ -26,6 +28,8 @@ client.on('ready', async () => {
 	faqsMessages(client, faqsChannel);
 	// send rules
 	rulesMessages(client, rulesChannel);
+	// send tips
+	tipsMessages(client, tipsChannel);
 
 	// update doges
 	client.on('guildMemberAdd', (member) => updateMembers(member.guild, membersChannelID));
