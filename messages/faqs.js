@@ -12,7 +12,7 @@ module.exports = async (client, linksChannel) => {
 			{ name: 'What algo are you using?', value: 'Quark', inline: false },
 			{ name: 'Why is my wallet not staking?', value: 'Make sure your wallet is synced and open.', inline: false },
 			{ name: 'Do locked MN coins stake?', value: 'Coins locked in a masternode do not stake, however, rewards that you keep in your wallet do.', inline: false },
-			{ name: 'Where can I buy DOGEC?', value: 'DOGEC is currently being traded on [Stakecube](https://stakecube.net/) and [Stex](https://www.stex.com/).', inline: false },
+			{ name: 'Where can I buy DOGEC?', value: 'DOGEC is currently being traded on [Stakecube](http://stakecube.dogec.io/) and [Stex](http://stex.dogec.io/).', inline: false },
 			{ name: 'What is an Orphan block?', value: 'Orphan blocks typically occur when two entities produce a new block at almost the same time. One makes it into the blockchain, and the other, the "orphan" does not.', inline: false },
 		];
 

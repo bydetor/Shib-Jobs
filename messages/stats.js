@@ -6,15 +6,18 @@ const axios = require('axios');
 module.exports = async (client, statsChannel) => {
 	const getStats = async () => {
 		const geckoRequest = await CoinGeckoClient.coins.fetch('dogecash');
-		const walletStats = await axios.get('https://chain.review/api/db/dogecash/getstats');
+		const explorer = await axios.get('https://explorer.dogec.io/api/v2');
+		const daemon = await axios.post('http://dogecash:passwordB6F&0lv1wWP1ZMIfyfrgKBB9C@65.21.105.236:8332', {
+			method: 'getmasternodecount',
+		});
 
 		const priceUSD = geckoRequest['data']['market_data']['current_price']['usd'];
-		const masternodes = walletStats['data']['masternodesCount'];
+		const masternodes = daemon['data']['result']['enabled'];
 		const dailyIncomeDOGEC = (4.32 * 1440) / masternodes;
 		const dailyIncomeUSD = dailyIncomeDOGEC * priceUSD;
 		const yearlyIncomeDOGEC = dailyIncomeDOGEC * 365;
 		const rewardFreq = 4.32 / dailyIncomeDOGEC * 24;
-		const circulatingSupply = walletStats['data']['money_supply'];
+		const circulatingSupply = explorer['data']['backend']['moneysupply'];
 		const genesis = geckoRequest['data']['genesis_date'];
 		const sinceGenesis = ((new Date()) - (new Date(genesis))) / (1000 * 3600 * 24);
 
@@ -37,7 +40,7 @@ module.exports = async (client, statsChannel) => {
 			'rewardFreq': `${Math.trunc(rewardFreq)}h ${(rewardFreq % 60).toFixed(0)}m`,
 			'roi': `${((yearlyIncomeDOGEC / 5000) * 100).toFixed(0)}% / ${((5000 / yearlyIncomeDOGEC) * 365).toFixed(0)} days`,
 			'coins_locked': `${(masternodes * 5000).toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} (${((masternodes * 5000 / circulatingSupply) * 100).toFixed(0)}%)`,
-			'current_blocks': walletStats['data']['block_count'],
+			'current_blocks': explorer['data']['backend']['blocks'],
 			'genesis': `${sinceGenesis.toFixed(0)} days` };
 	};
 
