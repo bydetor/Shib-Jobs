@@ -8,6 +8,7 @@ const faqsMessages = require('./messages/faqs');
 const rulesMessages = require('./messages/rules');
 const tipsMessages = require('./messages/tips');
 const financialMessages = require('./messages/financial');
+const peersMessages = require('./messages/peers');
 
 client.on('ready', async () => {
 	console.log('Bot Now connected!');
@@ -39,6 +40,12 @@ client.on('ready', async () => {
 	client.on('guildMemberAdd', (member) => updateMembers(member.guild, membersChannelID));
 	client.on('guildMemberRemove', (member) => updateMembers(member.guild, membersChannelID));
 	updateMembers(guild, membersChannelID);
+});
+
+client.on('message', message => {
+	if (message.content === '!peers') {
+		peersMessages(client, message.channel);
+	}
 });
 
 const token = config.token;

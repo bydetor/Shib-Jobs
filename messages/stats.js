@@ -7,9 +7,7 @@ module.exports = async (client, statsChannel) => {
 	const getStats = async () => {
 		const geckoRequest = await CoinGeckoClient.coins.fetch('dogecash');
 		const explorer = await axios.get('https://explorer.dogec.io/api/v2');
-		const daemon = await axios.post('http://dogecash:passwordB6F&0lv1wWP1ZMIfyfrgKBB9C@65.21.105.236:8332', {
-			method: 'getmasternodecount',
-		});
+		const daemon = await axios.get('http://api.dogecash.org/api/v1/network/masternodecount');
 
 		const priceUSD = geckoRequest['data']['market_data']['current_price']['usd'];
 		const masternodes = daemon['data']['result']['enabled'];
