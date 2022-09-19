@@ -19,7 +19,7 @@ module.exports = async (client, channel) => {
     const peerMessage = createEmbed(
       "BLOCKCOUNT",
       peersEmbed,
-      "DOGEC • The Doge is Now the Master(node)"
+      "DogeCash • Evolving how businesses and individuals interact with crypto"
     );
 
     channel.send(peerMessage);

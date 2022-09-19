@@ -44,7 +44,7 @@ module.exports = async (client, linksChannel) => {
       {
         name: "Where can I buy DOGEC?",
         value:
-          "DOGEC is currently being traded on [Stakecube](http://stakecube.dogec.io/) and [Stex](http://stex.dogec.io/).",
+          "DOGEC is currently being traded on [Stakecube](https://stakecube.net/app/exchange/dogec_btc), [New Capital](https://new.capital/exchange/trade/DOGEC_BTC), [Freixlite](https://freixlite.com/market/DOGEC/LTC), and [Xeggex](https://xeggex.com/market/DOGEC_USDT).",
         inline: false,
       },
       {

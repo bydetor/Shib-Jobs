@@ -7,7 +7,6 @@ const linksMessages = require("./messages/links");
 const faqsMessages = require("./messages/faqs");
 const rulesMessages = require("./messages/rules");
 const tipsMessages = require("./messages/tips");
-const financialMessages = require("./messages/financial");
 const peersMessages = require("./messages/peers");
 const blockcountMessages = require("./messages/blockcount");
 
@@ -20,9 +19,6 @@ client.on("ready", async () => {
   const faqsChannel = client.channels.cache.get(config.faqs_channel_id);
   const rulesChannel = client.channels.cache.get(config.rules_channel_id);
   const tipsChannel = client.channels.cache.get(config.tips_channel_id);
-  const financialChannel = client.channels.cache.get(
-    config.financial_status_channel_id
-  );
   const membersChannelID = config.members_channel_id;
   const guild = client.guilds.cache.get(config.server_id);
 
@@ -36,8 +32,6 @@ client.on("ready", async () => {
   rulesMessages(client, rulesChannel);
   // send tips
   tipsMessages(client, tipsChannel);
-  // send financial message
-  financialMessages(client, financialChannel);
 
   // update doges
   client.on("guildMemberAdd", (member) =>

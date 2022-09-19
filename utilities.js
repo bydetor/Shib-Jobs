@@ -7,12 +7,12 @@ module.exports = {
 	},
 	updateMembers(guild, channelID) {
 		const channel = guild.channels.cache.get(channelID);
-		channel.setName(`Doges: ${guild.memberCount.toLocaleString()}`);
+		channel.setName(`Members: ${guild.memberCount.toLocaleString()}`);
 	},
 	createEmbed(title, fields, footer, image = '') {
 		return new MessageEmbed()
-			.setColor([193, 151, 79])
-			.setAuthor(title, 'https://i.imgur.com/vz65ryG.gif')
+			.setColor([33, 107, 235])
+			.setAuthor(title, 'https://media.discordapp.net/attachments/942616146086068285/1021345857834061824/original.png')
 			.addFields(fields)
 			.setImage(image)
 			.setFooter(footer);
