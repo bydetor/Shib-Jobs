@@ -12,7 +12,7 @@ module.exports = {
 	createEmbed(title, fields, footer, image = '') {
 		return new MessageEmbed()
 			.setColor([33, 107, 235])
-			.setAuthor(title, 'https://media.discordapp.net/attachments/942616146086068285/1021345857834061824/original.png')
+			.setAuthor(title, 'https://media.discordapp.net/attachments/942616146086068285/1021362288902537216/bot-2.png')
 			.addFields(fields)
 			.setImage(image)
 			.setFooter(footer);

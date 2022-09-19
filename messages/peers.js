@@ -27,7 +27,6 @@ module.exports = async (client, channel) => {
     const peerMessage = createEmbed(
       "FILTERED AND REAL-TIME NON-FORKING PEERS!",
       peersEmbed,
-      "DOGEC • The Doge is Now the Master(node)"
     );
 
     channel.send(peerMessage);
