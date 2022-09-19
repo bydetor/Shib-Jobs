@@ -1,8 +1,6 @@
-const { clearChats, createEmbed } = require("../utilities.js");
+const { createEmbed } = require("../utilities.js");
 module.exports = async (client, linksChannel) => {
   try {
-    await clearChats(linksChannel);
-
     const faqs = [
       {
         name: "What is the max supply for DOGEC?",

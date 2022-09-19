@@ -1,5 +1,5 @@
 const CoinGecko = require("coingecko-api");
-const { clearChats, createEmbed } = require("../utilities.js");
+const { createEmbed } = require("../utilities.js");
 const CoinGeckoClient = new CoinGecko();
 const axios = require("axios");
 
@@ -224,8 +224,6 @@ module.exports = async (client, statsChannel) => {
       // eslint-disable-next-line no-constant-condition
       while (true) {
         const messages = await createMessages();
-
-        await clearChats(statsChannel);
 
         statsChannel.send(messages["price"]);
 

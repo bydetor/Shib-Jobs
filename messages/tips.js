@@ -1,8 +1,6 @@
-const { clearChats, createEmbed } = require('../utilities.js');
+const { createEmbed } = require('../utilities.js');
 module.exports = async (client, problemsChannel) => {
 	try {
-		await clearChats(problemsChannel);
-
 		const syncTip = [
 			// eslint-disable-next-line quotes
 			{ name: 'Follow these steps:', value: `

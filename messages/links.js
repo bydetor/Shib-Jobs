@@ -1,8 +1,6 @@
-const { clearChats, createEmbed } = require('../utilities.js');
+const { createEmbed } = require('../utilities.js');
 module.exports = async (client, linksChannel) => {
 	try {
-		await clearChats(linksChannel);
-
 		const officialLinks = [
 			{ name: 'DogeCash Links', value: '[Website](https://dogecash.net)\n[Explorer](https://explorer.dogec.io)\n[Wallet](https://github.com/dogecash/dogecash/releases)', inline: true },
 			{ name: 'Social Media', value: '[Twitter](https://twitter.com/dogecashcoin/)\n[BitcoinTalk](https://bitcointalk.org/index.php?topic=5134905.0)\n[Discord](https://discord.gg/kHNKKYeBVS)\n[Telegram](https://t.me/dogecashcoin)\n[Github](https://github.com/dogecash)\n[Reddit](https://www.reddit.com/r/DogeCash)', inline: true },
